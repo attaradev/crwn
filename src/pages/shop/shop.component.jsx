@@ -1,14 +1,16 @@
 import React from 'react';
 import { collections } from '../../data';
+import { CollectionsPreview } from '../../components/collections-preview/collections-preview.component';
 
 
 export class ShopPage extends React.Component {
   state = { collections }
 
   render() {
+    const { collections } = this.state;
     return (
-      <div>
-        <h1>Shop</h1>
+      <div className='shop'>
+        {collections.map(({ id, ...collectionProps }) => <CollectionsPreview key={id} {...collectionProps} />)}
       </div>
     );
   }
