@@ -1,0 +1,12 @@
+.sign-in {
+  width: 95vw;
+  max-width: 25rem;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+
+  .title {
+    margin: 0.8rem 0;
+    text-transform: uppercase;
+  }
+}
