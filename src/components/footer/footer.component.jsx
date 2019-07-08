@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import './footer.styles.scss';
-import { ReactComponent as Logo } from '../../assets/crown.svg';
 
 export const Footer = () => (
   <footer className='footer'>
