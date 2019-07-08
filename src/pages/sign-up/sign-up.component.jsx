@@ -2,7 +2,7 @@ import React from 'react';
 import './sign-up.styles.scss';
 import { FormInput } from '../../components/form-input/form-input.component';
 import { Button } from '../../components/button/button.component';
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { signInWithGoogle } from '../../utils/firebase.utils';
 
 const INITIAL_STATE = {
   email: '',
