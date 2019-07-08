@@ -8,7 +8,7 @@ export const CollectionItem = ({ name, imageUrl, price }) => (
     </div>
     <div className='item-footer'>
       <span className='name'>{name}</span>
-      <span className='price'>{price}</span>
+      <span className='price'>{`$${price}`}</span>
     </div>
   </div>
 );
