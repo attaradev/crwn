@@ -1,4 +1,5 @@
 import React from 'react';
+import './shop.styles.scss';
 import { collections } from '../../data';
 import { CollectionsPreview } from '../../components/collections-preview/collections-preview.component';
 

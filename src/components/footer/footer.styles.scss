@@ -1,0 +1,13 @@
+.footer {
+  text-align: center;
+  padding: 0.5rem;
+  background-color: azure;
+  position: absolute;
+  width:100%;
+  bottom: 0;
+  margin: 0;
+
+  .credit, a {
+    color: darkgrey;
+  }
+}

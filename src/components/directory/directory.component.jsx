@@ -8,9 +8,9 @@ export class Directory extends Component {
 
   render() {
     return (
-      <header className='directory-menu'>
+      <section className='directory-menu'>
         {this.state.sections.map(({ id, ...sectionProps }) => <MenuItem key={id} {...sectionProps} />)}
-      </header>
+      </section>
     );
   }
 }
