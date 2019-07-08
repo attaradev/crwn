@@ -3,6 +3,7 @@ import './sign-in.styles.scss';
 import { FormInput } from '../../components/form-input/form-input.component';
 import { Button } from '../../components/button/button.component';
 import { signInWithGoogle } from '../../utils/firebase.utils';
+import { Link } from 'react-router-dom';
 
 const INITIAL_STATE = {
   email: '',
@@ -32,6 +33,7 @@ export class SignInPage extends React.Component {
         <h2 className='title'>Sign in to your account</h2>
         <span>Sign in with your email and password</span>
         <form className='form' onSubmit={this.handleSubmit}>
+          <span>Don't have an account? <Link to='/register'>Sign up</Link></span>
           <FormInput
             type='email'
             name='email'

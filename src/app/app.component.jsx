@@ -4,7 +4,7 @@ import './app.style.scss';
 import { Header } from '../components/header/header.component';
 import { Homepage } from '../pages/homepage/homepage.component';
 import { ShopPage } from '../pages/shop/shop.component';
-import { Contact } from '../pages/contact/contact.component';
+import { ContactPage } from '../pages/contact/contact.component';
 import { SignInPage } from '../pages/sign-in/sign-in.component';
 import { SignUpPage } from '../pages/sign-up/sign-up.component';
 import { auth } from '../utils/firebase.utils';
@@ -39,7 +39,7 @@ export class App extends React.Component {
           <Route path='/shop' component={ShopPage} />
           <Route path='/login' component={SignInPage} />
           <Route path='/register' component={SignUpPage} />
-          <Route path='/contact' component={Contact} />
+          <Route path='/contact' component={ContactPage} />
         </Switch>
         <Footer />
       </div>

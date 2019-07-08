@@ -1,8 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './sign-up.styles.scss';
 import { FormInput } from '../../components/form-input/form-input.component';
 import { Button } from '../../components/button/button.component';
-import { signInWithGoogle } from '../../utils/firebase.utils';
 
 const INITIAL_STATE = {
   email: '',
@@ -10,8 +10,10 @@ const INITIAL_STATE = {
 };
 
 export class SignUpPage extends React.Component {
-  state = {
-    ...INITIAL_STATE
+  constructor() {
+    super();
+
+    this.state = INITIAL_STATE;
   }
 
   handleChange = event => {
@@ -26,10 +28,12 @@ export class SignUpPage extends React.Component {
 
   render() {
     return (
-      <div className='sign-in'>
+      <div className='sign-up'>
         <h2 className='title'>Sign in to your account</h2>
-        <span>Sign in with your email and password</span>
+        <span>Sign up with your email and password</span>
         <form className='form' onSubmit={this.handleSubmit}>
+          <span>Already have an account? <Link to='/login'>Sign in</Link></span>
+
           <FormInput
             type='email'
             name='email'
@@ -46,8 +50,7 @@ export class SignUpPage extends React.Component {
             onChange={this.handleChange}
             required
           />
-          <Button type='submit'>Sign in</Button>
-          <Button onClick={signInWithGoogle}>Sign in with google</Button>
+          <Button style={{ width: '100%' }} type='submit'>Sign up</Button>
         </form>
       </div>
     );
