@@ -48,8 +48,10 @@ export class SignInPage extends React.Component {
             onChange={this.handleChange}
             required
           />
-          <Button type='submit'>Sign in</Button>
-          <Button onClick={signInWithGoogle}>Sign in with google</Button>
+          <div className='btn-group'>
+            <Button type='submit'>Sign in</Button>
+            <Button onClick={signInWithGoogle} isGoogleBtn={true}>Sign in with google</Button>
+          </div>
         </form>
       </div>
     );

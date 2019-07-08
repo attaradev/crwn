@@ -7,7 +7,7 @@ export const FormInput = ({ label, name, ...inputProps }) => (
       label
         ? (
           <label
-            className={`${inputProps.value.length ? 'shrink' : ''} form-input-label`}
+            className={`${inputProps.value.length ? 'shrink ' : ''}form-input-label`}
             htmlFor={name}>{label}
           </label>
         )

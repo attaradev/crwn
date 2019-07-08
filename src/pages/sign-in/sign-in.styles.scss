@@ -3,10 +3,17 @@
   max-width: 25rem;
   display: flex;
   flex-direction: column;
+  text-align: center;
   margin: 0 auto;
 
   .title {
     margin: 0.8rem 0;
     text-transform: uppercase;
+  }
+
+  .btn-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
   }
 }
