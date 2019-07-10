@@ -1,9 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './sign-in.styles.scss';
 import { FormInput } from '../../components/form-input/form-input.component';
 import { Button } from '../../components/button/button.component';
-import { signInWithGoogle } from '../../utils/firebase.utils';
-import { Link } from 'react-router-dom';
+import { signInWithGoogle, auth } from '../../utils/firebase.utils';
 
 const INITIAL_STATE = {
   email: '',
@@ -22,9 +22,16 @@ export class SignInPage extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    this.setState(INITIAL_STATE);
+
+    try {
+      const { email, password } = this.state;
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState(INITIAL_STATE);
+    } catch (error) {
+      alert(error.message);
+    }
   }
 
   render() {
