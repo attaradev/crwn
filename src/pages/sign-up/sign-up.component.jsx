@@ -39,7 +39,7 @@ export class SignUpPage extends React.Component {
 
       this.setState(INITIAL_STATE);
     } catch (error) {
-      console.error('Unable to register user:', error.message);
+      alert(error.message);
     }
   }
 
