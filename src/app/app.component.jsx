@@ -11,7 +11,7 @@ import { SignInPage } from '../pages/sign-in/sign-in.component';
 import { SignUpPage } from '../pages/sign-up/sign-up.component';
 import { Footer } from '../components/footer/footer.component';
 import { auth, createUserProfileDocument } from '../utils/firebase.utils';
-import { setCurrentUser } from '../redux/user/user-actions';
+import { setCurrentUser } from '../redux/user/user.actions';
 
 
 class App extends React.Component {
