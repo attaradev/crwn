@@ -11,8 +11,8 @@ const mapDispatchToProps = dispatch => ({
 export const CartIcon = connect(
   null,
   mapDispatchToProps
-)(props => (
-  <div className='cart-icon' onClick={props.toggleCartHidden} >
+)(({ toggleCartHidden }) => (
+  <div className='cart-icon' onClick={toggleCartHidden} >
     <Cart className='cart' />
     <span className='item-count'> 0 </span>
   </div>
