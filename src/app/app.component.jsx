@@ -51,7 +51,7 @@ class App extends React.Component {
           <Route path='/shop' component={ShopPage} />
           <Route path='/contact' component={ContactPage} />
           <Route exact path='/login' render={() => currentUser === null ? <SignInPage /> : <Redirect to='/' />} />
-          <Route exact path='/register' render={() => currentUser === null ? <SignInPage /> : <Redirect to='/' />}  />
+          <Route exact path='/register' render={() => currentUser === null ? <SignUpPage /> : <Redirect to='/' />} />
         </Switch>
         <Footer />
       </div>
