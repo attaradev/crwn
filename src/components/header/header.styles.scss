@@ -8,11 +8,12 @@
   position: sticky;
   top: 0;
   background-color: rgba(255, 255, 255, 0.95);
+  z-index: 1000;
 
   .logo-container {
     height: 100%;
     width: 70px;
-    padding: 25px;
+    padding: 25px 0;
   }
 
   .navigation {
@@ -22,7 +23,7 @@
     align-items: center;
     justify-content: flex-end;
 
-    .navigation-link {
+    .navigation-link:not(:last-child) {
       padding: 10px 15px;
       text-transform: uppercase;
       cursor: pointer;

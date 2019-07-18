@@ -13,6 +13,8 @@
   font-weight: bolder;
   border: none;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
 
   &:hover {
     background-color: white;
@@ -22,11 +24,24 @@
 
   &.google {
     background-color: #4285f4;
+    color: white;
 
     &:hover {
-    background-color: white;
-    color: #4285f4;
-    border: 1px solid #4285f4;
+      background-color: #357ae8;
+      border: none;
+    }
   }
+
+  &.inverted {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+
+    &:hover {
+      background-color: black;
+      color: white;
+      border: none;
+    }
   }
 }
+
