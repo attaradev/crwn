@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './header.styles.scss';
+import { CartIcon } from './../cart-icon/cart-icon.component';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../utils/firebase.utils';
 
@@ -22,6 +23,7 @@ export const Header = connect(mapStateToProps)(({ currentUser }) => (
           ? <Link className='navigation-link' to='/login'>Sign in</Link>
           : <div className='navigation-link' onClick={() => auth.signOut()}>Sign out</div>
       }
+      <CartIcon />
     </nav>
   </header>
 ));
