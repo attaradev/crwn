@@ -1,5 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import './app.style.scss';
 import { Header } from '../components/header/header.component';
 import { Homepage } from '../pages/homepage/homepage.component';
@@ -9,26 +11,21 @@ import { SignInPage } from '../pages/sign-in/sign-in.component';
 import { SignUpPage } from '../pages/sign-up/sign-up.component';
 import { Footer } from '../components/footer/footer.component';
 import { auth, createUserProfileDocument } from '../utils/firebase.utils';
+import { setCurrentUser } from '../redux/user/user-actions';
 
 
-export class App extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      currentUser: null
-    };
-  }
-
+class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    const { setCurrentUser } = this.props;
+
     this.unsubscribeFromAuth = auth.onAuthStateChanged(
       async authicatedUser => {
         if (authicatedUser) {
           const userReference = await createUserProfileDocument(authicatedUser);
           userReference.onSnapshot(snapshot => {
-            this.setState({
+            setCurrentUser({
               currentUser: {
                 id: snapshot.id,
                 ...snapshot.data()
@@ -37,7 +34,7 @@ export class App extends React.Component {
           });
         };
 
-        this.setState({ currentUser: null });
+        setCurrentUser({ currentUser: null });
       }
     );
   }
@@ -49,7 +46,7 @@ export class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <Header user={this.state.currentUser} />
+        <Header />
         <Switch>
           <Route exact path='/' component={Homepage} />
           <Route path='/shop' component={ShopPage} />
@@ -62,3 +59,9 @@ export class App extends React.Component {
     );
   }
 };
+
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+
+export default connect(null, mapDispatchToProps)(App);
