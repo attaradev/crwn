@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from './../button/button.component';
-import { addItemToCart } from '../../redux/cart/cart.actions';
+import { addItem } from '../../redux/cart/cart.actions';
 import './collection-item.styles.scss';
 
 const mapDispatchToProps = dispatch => ({
-  addItemToCart: item => dispatch(addItemToCart(item))
+  addItem: item => dispatch(addItem(item))
 });
 
 export const CollectionItem = connect(
   null,
   mapDispatchToProps
-)(({ item, addItemToCart }) => {
+)(({ item, addItem }) => {
   const { name, price, imageUrl } = item;
 
-  const handleClick = () => addItemToCart(item);
+  const handleClick = () => addItem(item);
   return (
     <div className='collection-item'>
       <div className='image'>
