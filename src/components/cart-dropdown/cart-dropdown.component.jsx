@@ -17,7 +17,11 @@ export const CartDropdown = connect(
 )(({ itemsInCart }) => (
   <div className='cart-dropdown'>
     <div className='cart-items'>
-      {itemsInCart.map(itemInCart => <CartItem key={itemInCart.id} item={itemInCart} />)}
+      {
+        itemsInCart.length !== 0
+          ? itemsInCart.map(itemInCart => <CartItem key={itemInCart.id} item={itemInCart} />)
+          : <span className='empty-cart'>Your cart is empty.</span>
+      }
     </div>
     <Button>Go to checkout</Button>
   </div>
