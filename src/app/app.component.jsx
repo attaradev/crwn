@@ -8,6 +8,7 @@ import { ShopPage } from '../pages/shop/shop.component';
 import { ContactPage } from '../pages/contact/contact.component';
 import { SignInPage } from '../pages/sign-in/sign-in.component';
 import { SignUpPage } from '../pages/sign-up/sign-up.component';
+import { CheckoutPage } from '../pages/checkout/checkout.component';
 import { Footer } from '../components/footer/footer.component';
 import { auth, createUserProfileDocument } from '../utils/firebase.utils';
 import { setCurrentUser } from '../redux/user/user.actions';
@@ -51,8 +52,29 @@ class App extends React.Component {
           <Route exact path='/' component={Homepage} />
           <Route path='/shop' component={ShopPage} />
           <Route path='/contact' component={ContactPage} />
-          <Route exact path='/login' render={() => currentUser === null ? <SignInPage /> : <Redirect to='/' />} />
-          <Route exact path='/register' render={() => currentUser === null ? <SignUpPage /> : <Redirect to='/' />} />
+          <Route
+            path='/checkout'
+            render={() => currentUser !== null
+              ? <CheckoutPage />
+              : <Redirect to='/login' />}
+
+          />
+          <Route
+            exact
+            path='/login'
+            render={() => currentUser === null
+              ? <SignInPage />
+              : <Redirect to='/' />
+            }
+          />
+          <Route
+            exact
+            path='/register'
+            render={() => currentUser === null
+              ? <SignUpPage />
+              : <Redirect to='/' />
+            }
+          />
         </Switch>
         <Footer />
       </div>
