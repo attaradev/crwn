@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from '../button/button.component';
 import { CartItem } from '../cart-item/cart-item.component';
-import { selectItemsInCartCount } from '../../redux/cart/cart.selectors';
+import { selectItemsInCart } from '../../redux/cart/cart.selectors';
 import './cart-dropdown.styles.scss';
 
 
 const mapStateToProps = state => ({
-  itemsInCart: selectItemsInCartCount(state)
+  itemsInCart: selectItemsInCart(state)
 });
 
 
