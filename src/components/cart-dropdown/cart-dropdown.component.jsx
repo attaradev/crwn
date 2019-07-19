@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'react';
+import { createStructuredSelector } from 'reselect';
 import { Button } from '../button/button.component';
 import { CartItem } from '../cart-item/cart-item.component';
 import { selectItemsInCart } from '../../redux/cart/cart.selectors';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { createStructuredSelector } from 'react';
+import { createStructuredSelector } from 'reselect';
 import { CartIcon } from './../cart-icon/cart-icon.component';
 import { CartDropdown } from './../cart-dropdown/cart-dropdown.component';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
