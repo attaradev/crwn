@@ -59,7 +59,7 @@ export class SignInPage extends React.Component {
           />
           <div className='btn-group'>
             <Button type='submit'>Sign in</Button>
-            <Button onClick={signInWithGoogle} isGoogleBtn={true}>Sign in with google</Button>
+            <Button isGoogleBtn onClick={signInWithGoogle}>Sign in with google</Button>
           </div>
         </form>
       </div>
