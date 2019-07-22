@@ -10,10 +10,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export const CollectionsOverview = connect(mapStateToProps)(
-  ({ collections, ...collectionProps }) => (
+  ({ collections, ...collectionsProps }) => (
     <div className='collections-overview'>
       {
-        collections.map(collection => <CollectionsPreview key={collection.id} {...collectionProps} />)
+        collections.map(collection => <CollectionsPreview key={collection.id} {...collectionsProps} />)
       }
     </div>
   )
