@@ -9,7 +9,13 @@ export const addItemToCart = (itemsInCart, itemToAdd) => {
   }
 
   return [...itemsInCart, { ...itemToAdd, quantity: 1 }];
-}
+};
+
+export const removeItemFromCartIfQuantityIsZero = (itemsInCart, item) => {
+  return item.quantity === 1
+    ? itemsInCart.filter(itemInCart => itemInCart.id !== item.id)
+    : itemsInCart
+};
 
 export const formatAsMoney = amount => amount.toLocaleString('en-US', {
   style: 'currency',
