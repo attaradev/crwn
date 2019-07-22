@@ -3,12 +3,8 @@ import React from 'react';
 import './checkout-item.styles.scss';
 import { formatAsMoney } from '../../utils/cart.utils';
 
-export const CheckoutItem = ({ item, handleDelete }) => {
+export const CheckoutItem = ({ item, handleDelete, handleIncrease, handleDecrease }) => {
   const { name, imageUrl, price, quantity } = item;
-
-  const handleClick = () => {
-    handleDelete(item);
-  }
 
   return (
     <div className='checkout-item'>
@@ -17,16 +13,16 @@ export const CheckoutItem = ({ item, handleDelete }) => {
       </div>
       <span className='name'>{name}</span>
       <span className='quantity'>
-        <span className='arrow'>&#10094;</span>
+        <span className='arrow' onClick={() => handleDecrease(item)}>&#10094;</span>
         <span className='value'>{quantity}</span>
-        <span className='arrow'>&#10095;</span>
+        <span className='arrow' onClick={() => handleIncrease(item)}>&#10095;</span>
       </span>
       <span className='price'>
         {
           formatAsMoney(price)
         }
       </span>
-      <div className='remove-button' onClick={handleClick}>&#10005;</div>
+      <div className='remove-button' onClick={() => handleDelete(item)}>&#10005;</div>
     </div>
   )
 };
