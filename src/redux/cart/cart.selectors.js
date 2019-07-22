@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { formatAsMoney } from '../../utils/cart.utils';
 
 const selectCart = state => state.cart;
 
@@ -22,8 +23,8 @@ export const selectCartHidden = createSelector(
 
 export const selectCartTotal = createSelector(
   [selectItemsInCart],
-  itemsInCart => itemsInCart.reduce(
+  itemsInCart => formatAsMoney(itemsInCart.reduce(
     (total, { quantity, price }) => total + (quantity * price),
     0
-  )
+  ))
 );

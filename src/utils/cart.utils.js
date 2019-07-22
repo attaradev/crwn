@@ -10,3 +10,8 @@ export const addItemToCart = (itemsInCart, itemToAdd) => {
 
   return [...itemsInCart, { ...itemToAdd, quantity: 1 }];
 }
+
+export const formatAsMoney = amount => amount.toLocaleString('en-US', {
+  style: 'currency',
+  currency: 'USD'
+});

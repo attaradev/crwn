@@ -1,0 +1,24 @@
+tr {
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid darkgrey;
+
+    td {
+      text-transform: capitalize;
+      width: 23%;
+      display: flex;
+      padding-left: 0.2rem;
+
+      &:first-child {
+        overflow: hidden;
+        max-width: 23%;
+      }
+
+      &:last-child {
+        width: 8%;
+        padding: 0 0.4rem;
+      }
+    }
+  }

@@ -16,7 +16,7 @@ export const CheckoutPage = connect(
   return (
     <div className='checkout'>
       <table>
-        <thead className='thead'>
+        <thead className='heading'>
           <tr>
             <th>Product</th>
             <th>Description</th>
@@ -25,10 +25,17 @@ export const CheckoutPage = connect(
             <th>Remove</th>
           </tr>
         </thead>
-        <tbody>
-          {itemsInCart.map(item => <CheckoutItem key={item.id} {...item} />)}
+        <tbody className='body'>
+          {
+            itemsInCart.map(item => <CheckoutItem key={item.id} {...item} />)
+          }
         </tbody>
-        <tfooter></tfooter>
+        <tfoot>
+          <tr>
+            <th scope="row">Totals:</th>
+            <td>{cartTotal}</td>
+          </tr>
+        </tfoot>
       </table>
     </div >
   )

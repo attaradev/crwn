@@ -10,6 +10,8 @@ export const CheckoutItem = ({ id, name, imageUrl, price, quantity }) => (
     <td>{name}</td>
     <td>{quantity}</td>
     <td>{price}</td>
-    <td>{`x ${id}`}</td>
+    <td>
+      <span>&#10006;</span>
+    </td>
   </tr>
 )
