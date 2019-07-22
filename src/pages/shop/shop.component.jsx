@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { selectCollections } from './../../redux/shop/shop.selectors';
-import { CollectionsPreview } from '../../components/collections-preview/collections-preview.component';
+import { CollectionsOverview } from '../../components/collections-overview/collections-overview.component';
 import './shop.styles.scss';
 
 const mapStateToProps = state => ({
@@ -10,6 +10,6 @@ const mapStateToProps = state => ({
 
 export const ShopPage = connect(mapStateToProps)(({ collections }) => (
   <div className='shop'>
-    {collections.map(({ id, ...collectionProps }) => <CollectionsPreview key={id} {...collectionProps} />)}
+    <CollectionsOverview />
   </div>
 ));
