@@ -12,28 +12,16 @@ const mapStateToProps = createStructuredSelector({
   cartTotal: selectCartTotal
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   removeItemFromCart: dispatch(removeItemFromCart(item)),
-//   decreaseItem: dispatch(decreaseItem(item)),
-//   increaseItem: dispatch(increaseItem(item))
-// })
+const mapDispatchToProps = dispatch => ({
+  removeItemFromCart: item => dispatch(removeItemFromCart(item)),
+  decreaseItem: item => dispatch(decreaseItem(item)),
+  increaseItem: item => dispatch(increaseItem(item))
+})
 
 export const CheckoutPage = connect(
-  mapStateToProps
-)(({ itemsInCart, cartTotal, dispatch }) => {
-  const handleDeleteItem = item => {
-    dispatch(removeItemFromCart(item));
-  }
-
-  const handleIncreaseItem = item => {
-    dispatch(increaseItem(item));
-  }
-
-  const handleDecreaseItem = item => {
-    dispatch(decreaseItem(item));
-  }
-
-  return (
+  mapStateToProps,
+  mapDispatchToProps
+)(({ itemsInCart, cartTotal, removeItemFromCart, increaseItem, decreaseItem }) => (
     <div className='checkout'>
       <div className='checkout-header'>
         <div className='header-block'>
@@ -56,12 +44,11 @@ export const CheckoutPage = connect(
         <CheckoutItem
           key={cartItem.id}
           item={cartItem}
-          handleDelete={handleDeleteItem}
-          handleIncrease={handleIncreaseItem}
-          handleDecrease={handleDecreaseItem}
+          handleDelete={removeItemFromCart}
+          handleIncrease={increaseItem}
+          handleDecrease={decreaseItem}
         />
       ))}
       <div className='total'>TOTAL: {cartTotal}</div>
     </div>
-  )
-});
+  ));
