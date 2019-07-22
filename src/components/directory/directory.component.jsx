@@ -1,10 +1,11 @@
 import React from 'react';
-import { MenuItem } from '../menu-item/menu-item.component';
-import './directory.styles.scss';
 import { connect } from 'react-redux';
+import { MenuItem } from '../menu-item/menu-item.component';
+import { selectSections } from './../../redux/directory/directory.selectors';
+import './directory.styles.scss';
 
 const mapStateToProps = state => ({
-  sections: state.directory.sections
+  sections: selectSections(state)
 });
 
 export const Directory = connect(mapStateToProps)(
