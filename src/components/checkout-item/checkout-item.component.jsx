@@ -18,7 +18,7 @@ export const CheckoutItem = ({ item, handleDelete }) => {
       <span className='name'>{name}</span>
       <span className='quantity'>
         <span className='arrow'>&#10094;</span>
-        {quantity}
+        <span className='value'>{quantity}</span>
         <span className='arrow'>&#10095;</span>
       </span>
       <span className='price'>

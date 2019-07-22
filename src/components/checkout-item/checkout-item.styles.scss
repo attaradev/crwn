@@ -26,7 +26,12 @@
     display: flex;
 
     .arrow {
+      display: block;
       cursor: pointer;
+    }
+
+    .value {
+      margin: 0 1rem;
     }
   }
 
