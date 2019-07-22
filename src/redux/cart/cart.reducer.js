@@ -16,6 +16,8 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
       return { ...state, itemsInCart: state.itemsInCart.filter(itemInCart => itemInCart.id !== action.payload.id) }
     case CartTypes.DECREASE_ITEM:
       return { ...state, itemsInCart: removeItemFromCartIfQuantityIsZero(state.itemsInCart, action.payload) }
+    case CartTypes.INCREASE_ITEM:
+      return { ...state, itemsInCart: addItemToCart(state.itemsInCart, action.payload) }
     default:
       return state;
   }
