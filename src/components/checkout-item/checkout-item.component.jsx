@@ -16,7 +16,11 @@ export const CheckoutItem = ({ item, handleDelete }) => {
         <img src={imageUrl} alt='item' />
       </div>
       <span className='name'>{name}</span>
-      <span className='quantity'>{quantity}</span>
+      <span className='quantity'>
+        <span className='arrow'>&#10094;</span>
+        {quantity}
+        <span className='arrow'>&#10095;</span>
+      </span>
       <span className='price'>
         {
           formatAsMoney(price)
