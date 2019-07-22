@@ -15,28 +15,27 @@ export const CheckoutPage = connect(
 )(({ itemsInCart, cartTotal }) => {
   return (
     <div className='checkout'>
-      <table>
-        <thead className='heading'>
-          <tr>
-            <th>Product</th>
-            <th>Description</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-        <tbody className='body'>
-          {
-            itemsInCart.map(item => <CheckoutItem key={item.id} {...item} />)
-          }
-        </tbody>
-        <tfoot>
-          <tr>
-            <th scope="row">Totals:</th>
-            <td>{cartTotal}</td>
-          </tr>
-        </tfoot>
-      </table>
-    </div >
+      <div className='checkout-header'>
+        <div className='header-block'>
+          <span>Product</span>
+        </div>
+        <div className='header-block'>
+          <span>Description</span>
+        </div>
+        <div className='header-block'>
+          <span>Quantity</span>
+        </div>
+        <div className='header-block'>
+          <span>Price</span>
+        </div>
+        <div className='header-block'>
+          <span>Remove</span>
+        </div>
+      </div>
+      {itemsInCart.map(cartItem => (
+        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+      ))}
+      <div className='total'>TOTAL: {cartTotal}</div>
+    </div>
   )
 });

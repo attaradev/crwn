@@ -1,17 +1,20 @@
 import React from 'react';
 
 import './checkout-item.styles.scss';
+import { formatAsMoney } from '../../utils/cart.utils';
 
-export const CheckoutItem = ({ id, name, imageUrl, price, quantity }) => (
-  <tr>
-    <td>
-      <img src={imageUrl} alt={name} />
-    </td>
-    <td>{name}</td>
-    <td>{quantity}</td>
-    <td>{price}</td>
-    <td>
-      <span>&#10006;</span>
-    </td>
-  </tr>
-)
+export const CheckoutItem = ({ cartItem: { name, imageUrl, price, quantity } }) => (
+  <div className='checkout-item'>
+    <div className='image-container'>
+      <img src={imageUrl} alt='item' />
+    </div>
+    <span className='name'>{name}</span>
+    <span className='quantity'>{quantity}</span>
+    <span className='price'>
+      {
+        formatAsMoney(price)
+      }
+    </span>
+    <div className='remove-button'>&#10005;</div>
+  </div>
+);
