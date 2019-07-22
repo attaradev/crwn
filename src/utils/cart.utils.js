@@ -14,7 +14,13 @@ export const addItemToCart = (itemsInCart, itemToAdd) => {
 export const removeItemFromCartIfQuantityIsZero = (itemsInCart, item) => {
   return item.quantity === 1
     ? itemsInCart.filter(itemInCart => itemInCart.id !== item.id)
-    : itemsInCart
+    : itemsInCart.map(itemInCart => {
+      if (itemInCart.id === item.id) {
+        itemInCart.quantity = itemInCart.quantity - 1;
+      }
+
+      return itemInCart;
+    })
 };
 
 export const formatAsMoney = amount => amount.toLocaleString('en-US', {
