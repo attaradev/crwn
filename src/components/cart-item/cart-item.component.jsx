@@ -1,5 +1,6 @@
 import React from 'react'
 import './cart-item.styles.scss';
+import { formatAsMoney } from '../../utils/cart.utils';
 
 
 export const CartItem = ({ item: { imageUrl, name, price, quantity } }) => (
@@ -10,7 +11,7 @@ export const CartItem = ({ item: { imageUrl, name, price, quantity } }) => (
         {name}
       </span>
       <span className='price'>
-        {quantity} x ${price}
+        {quantity} x {formatAsMoney(price)}
       </span>
     </div>
   </div>
