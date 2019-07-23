@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import styled from 'styled-components';
 import { Header } from '../components/header/header.component';
 import { HomePage } from '../pages/homepage/homepage.component';
 import { ShopPage } from '../pages/shop/shop.component';
@@ -13,7 +14,16 @@ import { Footer } from '../components/footer/footer.component';
 import { auth, createUserProfileDocument } from '../utils/firebase.utils';
 import { setCurrentUser } from '../redux/user/user.actions';
 import { selectCurrentUser } from '../redux/user/user.selectors';
-import './app.style.scss';
+
+
+const AppContainer = styled.div`
+  position: relative;
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 4rem;
+`;
 
 
 class App extends React.Component {
@@ -46,7 +56,7 @@ class App extends React.Component {
   render() {
     const { currentUser } = this.props;
     return (
-      <div className="app">
+      <AppContainer>
         <Header />
         <Switch>
           <Route exact path='/' component={HomePage} />
@@ -77,7 +87,7 @@ class App extends React.Component {
           />
         </Switch>
         <Footer />
-      </div>
+      </AppContainer>
     );
   }
 };
