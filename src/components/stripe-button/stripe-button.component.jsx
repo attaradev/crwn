@@ -18,7 +18,7 @@ export const StripeCheckoutButton = ({ price }) => {
       name='CRWN, Inc'
       billingAddress
       shippingAddress
-      image='http://svgshare.com/i/CUz.svg'
+      image='https://svgshare.com/i/CUz.svg'
       description={`Your cart total is ${formatAsMoney(price)}`}
       amount={priceForStripe}
       panelLabel='Pay Now'
