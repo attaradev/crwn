@@ -21,7 +21,7 @@ const mapStateToProps = createStructuredSelector({
 
 export const Header = connect(mapStateToProps)(({ currentUser, hidden }) => (
   <HeaderContainer>
-    <LogoContainer>
+    <LogoContainer to='/'>
       <Logo />
     </LogoContainer>
     <NavigationContainer>
