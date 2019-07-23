@@ -18,6 +18,8 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
       return { ...state, itemsInCart: removeItemFromCartIfQuantityIsZero(state.itemsInCart, action.payload) }
     case CartTypes.INCREASE_ITEM:
       return { ...state, itemsInCart: addItemToCart(state.itemsInCart, action.payload) }
+    case CartTypes.CLEAR_CART:
+      return INITIAL_STATE
     default:
       return state;
   }
