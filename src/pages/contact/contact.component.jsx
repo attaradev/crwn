@@ -10,68 +10,62 @@ const INITIAL_STATE = {
   message: ''
 };
 
-export class ContactPage extends React.Component {
-  constructor() {
-    super();
+export const ContactPage = () => {
+  const [state, setState] = React.useState(INITIAL_STATE);
 
-    this.state = INITIAL_STATE;
-  }
-
-  handleChange = event => {
+  const handleChange = event => {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+    setState({ ...state, [name]: value });
   }
 
-  handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    this.setState(INITIAL_STATE);
+    setState(INITIAL_STATE);
   }
 
-  render() {
-    return (
-      <div className='contact'>
-        <h2 className='title'>Contact us</h2>
-        <span>We do our best to respond as soon as possible.</span>
-        <form className='form' onSubmit={this.handleSubmit}>
-          <FormInput
-            type='text'
-            name='name'
-            value={this.state.name}
-            label='name'
-            onChange={this.handleChange}
-            required
+  return (
+    <div className='contact'>
+      <h2 className='title'>Contact us</h2>
+      <span>We do our best to respond as soon as possible.</span>
+      <form className='form' onSubmit={handleSubmit}>
+        <FormInput
+          type='text'
+          name='name'
+          value={state.name}
+          label='name'
+          onChange={handleChange}
+          required
+        />
+        <FormInput
+          type='email'
+          name='email'
+          value={state.email}
+          label='email'
+          onChange={handleChange}
+          required
+        />
+        <FormInput
+          type='text'
+          name='subject'
+          value={state.subject}
+          label='subject'
+          onChange={handleChange}
+          required
+        />
+        <div className='input-group'>
+          <label
+            htmlFor='message'
+            className={`${state.message.length ? 'shrink ' : ''}form-input-label`}>
+            Message
+          </label>
+          <textarea
+            name='message'
+            value={state.message}
+            onChange={handleChange}
           />
-          <FormInput
-            type='email'
-            name='email'
-            value={this.state.email}
-            label='email'
-            onChange={this.handleChange}
-            required
-          />
-          <FormInput
-            type='text'
-            name='subject'
-            value={this.state.subject}
-            label='subject'
-            onChange={this.handleChange}
-            required
-          />
-          <div className='input-group'>
-            <label
-              htmlFor='message'
-              className={`${this.state.message.length ? 'shrink ' : ''}form-input-label`}>
-              Message
-            </label>
-            <textarea
-              name='message'
-              value={this.state.message}
-              onChange={this.handleChange}
-            />
-          </div>
-          <Button style={{ width: '100%' }} type='submit'>Send message</Button>
-        </form>
-      </div>
-    );
-  }
+        </div>
+        <Button style={{ width: '100%' }} type='submit'>Send message</Button>
+      </form>
+    </div>
+  );
 }
