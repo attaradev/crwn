@@ -1,7 +1,8 @@
 import React from 'react';
-import './contact.styles.scss';
 import { FormInput } from '../../components/form-input/form-input.component';
 import { Button } from '../../components/button/button.component';
+import { ContactContainer, Title, GroupContainer, TextAreaContainer, TextAreaLabel } from './contact.styles';
+
 
 const INITIAL_STATE = {
   name: '',
@@ -24,8 +25,8 @@ export const ContactPage = () => {
   }
 
   return (
-    <div className='contact'>
-      <h2 className='title'>Contact us</h2>
+    <ContactContainer>
+      <Title as='h2'>Contact us</Title>
       <span>We do our best to respond as soon as possible.</span>
       <form className='form' onSubmit={handleSubmit}>
         <FormInput
@@ -52,20 +53,20 @@ export const ContactPage = () => {
           onChange={handleChange}
           required
         />
-        <div className='input-group'>
-          <label
+        <GroupContainer>
+          <TextAreaLabel
             htmlFor='message'
-            className={`${state.message.length ? 'shrink ' : ''}form-input-label`}>
+            className={`${state.message.length ? 'shrink ' : ''}`}>
             Message
-          </label>
-          <textarea
+          </TextAreaLabel>
+          <TextAreaContainer
             name='message'
             value={state.message}
             onChange={handleChange}
           />
-        </div>
+        </GroupContainer>
         <Button style={{ width: '100%' }} type='submit'>Send message</Button>
       </form>
-    </div>
+    </ContactContainer>
   );
 }
