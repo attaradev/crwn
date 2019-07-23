@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { CollectionItem } from '../../components/collection-item/collection-item.component';
 import { selectCollection } from '../../redux/shop/shop.selectors';
-import './collection.styles.scss';
+import { CollectionContainer, CollectionItems, CollectionTitle } from './collection.styles';
 
 const mapStateToProps = (state, ownProps) => ({
   collection: selectCollection(ownProps.match.params.collectionName)(state)
@@ -11,13 +11,13 @@ const mapStateToProps = (state, ownProps) => ({
 
 export const CollectionPage = connect(mapStateToProps)(
   ({ collection: { title, items } }) => (
-    <div className='collection'>
-      <h2 className='title'>{title}</h2>
-      <div className='items'>
+    <CollectionContainer>
+      <CollectionTitle as='h2'>{title}</CollectionTitle>
+      <CollectionItems>
         {
           items.map(item => <CollectionItem key={item.id} item={item} />)
         }
-      </div>
-    </div>
+      </CollectionItems>
+    </CollectionContainer>
   )
 );
