@@ -3,7 +3,8 @@ export const CartTypes = {
   ADD_ITEM: 'ADD_ITEM',
   REMOVE_ITEM_FROM_CART: 'REMOVE_ITEM_FROM_CART',
   DECREASE_ITEM: 'DECREASE_ITEM',
-  INCREASE_ITEM: 'INCREASE_ITEM'
+  INCREASE_ITEM: 'INCREASE_ITEM',
+  CLEAR_CART: 'CLEAR_CART'
 };
 
 export const toggleCartHidden = () => ({
@@ -28,4 +29,8 @@ export const decreaseItem = item => ({
 export const increaseItem = item => ({
   type: CartTypes.INCREASE_ITEM,
   payload: item
+});
+
+export const clearCart = () => ({
+  type: CartTypes.CLEAR_CART
 });
