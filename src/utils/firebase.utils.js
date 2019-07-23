@@ -2,15 +2,15 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-const API_KEY = process.env.REACT_APP_FIREBASE_API_KEY;
+const { env } = process;
 const firebaseConfig = {
-  apiKey: API_KEY,
-  authDomain: "crwn-gh.firebaseapp.com",
-  databaseURL: "https://crwn-gh.firebaseio.com",
-  projectId: "crwn-gh",
-  storageBucket: "crwn-gh.appspot.com",
-  messagingSenderId: "993210399901",
-  appId: "1:993210399901:web:53bd046f185d7bc0"
+  apiKey: env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: env.REACT_APP_FIREBASE_APP_ID
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
