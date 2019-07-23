@@ -7,7 +7,12 @@ import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../utils/firebase.utils';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
-import { HeaderContainer, NavigationContainer, LogoContainer, NavigationLink } from './header.styles';
+import {
+  HeaderContainer,
+  NavigationContainer,
+  LogoContainer,
+  NavigationLink
+} from './header.styles';
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
