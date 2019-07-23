@@ -7,7 +7,7 @@ import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../utils/firebase.utils';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
-import { HeaderContainer, NavigationContainer, LogoContainer, NavigationLink, NavigationDiv } from './header.styles';
+import { HeaderContainer, NavigationContainer, LogoContainer, NavigationLink } from './header.styles';
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
@@ -25,7 +25,7 @@ export const Header = connect(mapStateToProps)(({ currentUser, hidden }) => (
       {
         currentUser === null
           ? <NavigationLink to='/login'>Sign in</NavigationLink>
-          : <NavigationDiv onClick={() => auth.signOut()}>Sign out</NavigationDiv>
+          : <NavigationLink as='div' onClick={() => auth.signOut()}>Sign out</NavigationLink>
       }
       <CartIcon />
     </NavigationContainer>

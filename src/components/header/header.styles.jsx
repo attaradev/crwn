@@ -1,11 +1,5 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
-const navigationLinkContainerStyles = css`
-  padding: 10px 15px;
-  text-transform: uppercase;
-  cursor: pointer;
-`;
 
 export const HeaderContainer = styled.div`
   height: 70px;
@@ -35,9 +29,7 @@ export const NavigationContainer = styled.nav`
 `;
 
 export const NavigationLink = styled(Link)`
-  ${navigationLinkContainerStyles}
-`;
-
-export const NavigationDiv = styled.div`
-  ${navigationLinkContainerStyles}
+  padding: 10px 15px;
+  text-transform: uppercase;
+  cursor: pointer;
 `;
