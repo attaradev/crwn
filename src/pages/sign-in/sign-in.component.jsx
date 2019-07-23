@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './sign-in.styles.scss';
 import { FormInput } from '../../components/form-input/form-input.component';
@@ -10,59 +10,55 @@ const INITIAL_STATE = {
   password: ''
 };
 
-export class SignInPage extends React.Component {
-  constructor() {
-    super();
+export const SignInPage = () => {
 
-    this.state = INITIAL_STATE;
-  }
+  const [state, setState] = useState(INITIAL_STATE);
 
-  handleChange = event => {
+  const handleChange = event => {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+    setState({ ...state, [name]: value });
   }
 
-  handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const { email, password } = this.state;
+      const { email, password } = state;
       await auth.signInWithEmailAndPassword(email, password);
-      this.setState(INITIAL_STATE);
+      setState(INITIAL_STATE);
     } catch (error) {
       alert(error.message);
     }
   }
 
-  render() {
-    return (
-      <div className='sign-in'>
-        <h2 className='title'>Sign in to your account</h2>
-        <span>Sign in with your email and password</span>
-        <form className='form' onSubmit={this.handleSubmit}>
-          <span>Don't have an account? <Link to='/register'>Sign up</Link></span>
-          <FormInput
-            type='email'
-            name='email'
-            value={this.state.email}
-            label='email'
-            onChange={this.handleChange}
-            required
-          />
-          <FormInput
-            type='password'
-            name='password'
-            value={this.state.password}
-            label='password'
-            onChange={this.handleChange}
-            required
-          />
-          <div className='btn-group'>
-            <Button type='submit'>Sign in</Button>
-            <Button isGoogleBtn onClick={signInWithGoogle}>Sign in with google</Button>
-          </div>
-        </form>
-      </div>
-    );
-  }
+  return (
+    <div className='sign-in'>
+      <h2 className='title'>Sign in to your account</h2>
+      <span>Sign in with your email and password</span>
+      <form className='form' onSubmit={handleSubmit}>
+        <span>Don't have an account? <Link to='/register'>Sign up</Link></span>
+        <FormInput
+          type='email'
+          name='email'
+          value={state.email}
+          label='email'
+          onChange={handleChange}
+          required
+        />
+        <FormInput
+          type='password'
+          name='password'
+          value={state.password}
+          label='password'
+          onChange={handleChange}
+          required
+        />
+        <div className='btn-group'>
+          <Button type='submit'>Sign in</Button>
+          <Button isGoogleBtn onClick={signInWithGoogle}>Sign in with google</Button>
+        </div>
+      </form>
+    </div>
+  );
+
 }
