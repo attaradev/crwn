@@ -1,28 +1,37 @@
 import React from 'react';
-
-import './checkout-item.styles.scss';
 import { formatAsMoney } from '../../utils/cart.utils';
+import {
+  CheckoutItemContainer,
+  ImageContainer,
+  ItemName,
+  ItemQuantity,
+  ItemPrice,
+  Arrow,
+  Value,
+  RemoveButton
+} from './checkout-item.styles';
+
 
 export const CheckoutItem = ({ item, handleDelete, handleIncrease, handleDecrease }) => {
   const { name, imageUrl, price, quantity } = item;
 
   return (
-    <div className='checkout-item'>
-      <div className='image-container'>
+    <CheckoutItemContainer>
+      <ImageContainer>
         <img src={imageUrl} alt='item' />
-      </div>
-      <span className='name'>{name}</span>
-      <span className='quantity'>
-        <span className='arrow' onClick={() => handleDecrease(item)}>&#10094;</span>
-        <span className='value'>{quantity}</span>
-        <span className='arrow' onClick={() => handleIncrease(item)}>&#10095;</span>
-      </span>
-      <span className='price'>
+      </ImageContainer>
+      <ItemName>{name}</ItemName>
+      <ItemQuantity>
+        <Arrow onClick={() => handleDecrease(item)}>&#10094;</Arrow>
+        <Value>{quantity}</Value>
+        <Arrow onClick={() => handleIncrease(item)}>&#10095;</Arrow>
+      </ItemQuantity>
+      <ItemPrice>
         {
           formatAsMoney(price)
         }
-      </span>
-      <div className='remove-button' onClick={() => handleDelete(item)}>&#10005;</div>
-    </div>
+      </ItemPrice>
+      <RemoveButton onClick={() => handleDelete(item)}>&#10005;</RemoveButton>
+    </CheckoutItemContainer>
   )
 };

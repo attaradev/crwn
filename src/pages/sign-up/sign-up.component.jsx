@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './sign-up.styles.scss';
 import { FormInput } from '../../components/form-input/form-input.component';
 import { Button } from '../../components/button/button.component';
 import { auth, createUserProfileDocument } from '../../utils/firebase.utils';
+import { SignUpContainer, Title } from './sign-up.styles';
 
 const INITIAL_STATE = {
   displayName: '',
@@ -40,8 +40,8 @@ export const SignUpPage = () => {
   }
 
   return (
-    <div className='sign-up'>
-      <h2 className='title'>Sign in to your account</h2>
+    <SignUpContainer>
+      <Title as='h2'>Sign in to your account</Title>
       <span>Sign up with your email and password</span>
       <form className='form' onSubmit={handleSubmit}>
         <span>Already have an account? <Link to='/login'>Sign in</Link></span>
@@ -80,6 +80,6 @@ export const SignUpPage = () => {
         />
         <Button style={{ width: '100%' }} type='submit'>Sign up</Button>
       </form>
-    </div>
+    </SignUpContainer>
   );
 }

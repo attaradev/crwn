@@ -6,7 +6,11 @@ import { Button } from '../button/button.component';
 import { CartItem } from '../cart-item/cart-item.component';
 import { selectItemsInCart } from '../../redux/cart/cart.selectors';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
-import './cart-dropdown.styles.scss';
+import {
+  DropdownContainer,
+  CartItems,
+  EmptyCart
+} from './cart-dropdown.styles';
 
 
 const mapStateToProps = createStructuredSelector({
@@ -24,16 +28,16 @@ export const CartDropdown = withRouter(
     };
 
     return (
-      <div className='cart-dropdown' >
-        <div className='cart-items'>
+      <DropdownContainer>
+        <CartItems>
           {
             itemsInCart.length !== 0
               ? itemsInCart.map(itemInCart => <CartItem key={itemInCart.id} item={itemInCart} />)
-              : <span className='empty-cart'>Your cart is empty.</span>
+              : <EmptyCart>Your cart is empty.</EmptyCart>
           }
-        </div>
+        </CartItems>
         <Button
           onClick={handleClick}
         >Go to checkout</Button>
-      </div>)
+      </DropdownContainer>)
   }));
