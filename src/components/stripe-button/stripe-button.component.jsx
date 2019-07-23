@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
 import { formatAsMoney } from '../../utils/cart.utils';
 import { clearCart } from '../../redux/cart/cart.actions';
-import './stripe-button.styles.scss';
-
-
 
 
 export const StripeCheckoutButton = connect()(
