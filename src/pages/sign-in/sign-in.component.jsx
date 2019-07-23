@@ -55,7 +55,7 @@ export const SignInPage = () => {
         />
         <div className='btn-group'>
           <Button type='submit'>Sign in</Button>
-          <Button isGoogleBtn onClick={signInWithGoogle}>Sign in with google</Button>
+          <Button isGoogleSignIn onClick={signInWithGoogle}>Sign in with google</Button>
         </div>
       </form>
     </div>
