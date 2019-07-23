@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './sign-in.styles.scss';
 import { FormInput } from '../../components/form-input/form-input.component';
 import { Button } from '../../components/button/button.component';
 import { signInWithGoogle, auth } from '../../utils/firebase.utils';
+import { SignInContainer, Title, ButtonGroup } from './sign-in.styles';
+
 
 const INITIAL_STATE = {
   email: '',
@@ -32,8 +33,8 @@ export const SignInPage = () => {
   }
 
   return (
-    <div className='sign-in'>
-      <h2 className='title'>Sign in to your account</h2>
+    <SignInContainer>
+      <Title as='h1'>Sign in to your account</Title>
       <span>Sign in with your email and password</span>
       <form className='form' onSubmit={handleSubmit}>
         <span>Don't have an account? <Link to='/register'>Sign up</Link></span>
@@ -53,12 +54,12 @@ export const SignInPage = () => {
           onChange={handleChange}
           required
         />
-        <div className='btn-group'>
+        <ButtonGroup>
           <Button type='submit'>Sign in</Button>
           <Button isGoogleSignIn onClick={signInWithGoogle}>Sign in with google</Button>
-        </div>
+        </ButtonGroup>
       </form>
-    </div>
+    </SignInContainer>
   );
 
 }
