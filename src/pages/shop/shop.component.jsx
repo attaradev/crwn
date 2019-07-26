@@ -5,7 +5,12 @@ import styled from 'styled-components';
 import { firestore, convertCollectionsSnapshotToMap } from '../../utils/firebase.utils';
 import { CollectionPage } from '../collection/collection.component';
 import { CollectionsOverview } from '../../components/collections-overview/collections-overview.component';
+import { WithSpinner } from '../../components/with-spinner/with-spinner.component';
 import { updateCollections } from '../../redux/shop/shop.actions';
+
+const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
+const CollectionPageWithSpinner = WithSpinner(CollectionPage);
+
 
 const ShopContainer = styled.div`
   margin-bottom: 6rem;
@@ -19,20 +24,25 @@ const mapDispatchToProps = dispatch => ({
 export const ShopPage = connect(
   null,
   mapDispatchToProps
-)(({ match, updateCollections }) => {
-  React.useEffect(() => {
-    const collectionReference = firestore.collection('collections');
+)(
+  ({ match, updateCollections }) => {
+    const [loading, setLoading] = React.useState(true);
 
-    collectionReference.onSnapshot(async snapshot => {
-      const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-      updateCollections(collectionsMap);
+    React.useEffect(() => {
+      const collectionReference = firestore.collection('collections');
+
+      collectionReference.onSnapshot(async snapshot => {
+        const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+        updateCollections(collectionsMap);
+        setLoading(false);
+      });
     });
-  });
 
-  return (
-    <ShopContainer>
-      <Route exact path={`${match.path}`} component={CollectionsOverview} />
-      <Route path={`${match.path}/:collectionName`} component={CollectionPage} />
-    </ShopContainer>
-  )
-});
+    return (
+      <ShopContainer>
+        <Route exact path={`${match.path}`} render={(props) => <CollectionsOverviewWithSpinner loading={loading} {...props} />} />
+        <Route path={`${match.path}/:collectionName`} render={(props) => <CollectionPageWithSpinner loading={loading} {...props} />} />
+      </ShopContainer>
+    )
+  }
+);
