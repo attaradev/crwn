@@ -25,14 +25,21 @@ const AppContainer = styled.div`
   margin: 0 4rem;
 `;
 
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
+});
 
-class App extends React.Component {
-  unsubscribeFromAuth = null;
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+});
 
-  componentDidMount() {
-    const { setCurrentUser } = this.props;
+export const App = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(({ currentUser, setCurrentUser }) => {
 
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(
+  React.useEffect(() => {
+    auth.onAuthStateChanged(
       async authicatedUser => {
         if (authicatedUser) {
           const userReference = await createUserProfileDocument(authicatedUser);
@@ -47,60 +54,40 @@ class App extends React.Component {
         setCurrentUser(null);
       }
     );
-  }
+  }, [setCurrentUser])
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+  return (
+    <AppContainer>
+      <Header />
+      <Switch>
+        <Route exact path='/' component={HomePage} />
+        <Route path='/shop' component={ShopPage} />
+        <Route path='/contact' component={ContactPage} />
+        <Route
+          path='/checkout'
+          render={() => currentUser !== null
+            ? <CheckoutPage />
+            : <Redirect to='/login' />}
 
-  render() {
-    const { currentUser } = this.props;
-    return (
-      <AppContainer>
-        <Header />
-        <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route path='/shop' component={ShopPage} />
-          <Route path='/contact' component={ContactPage} />
-          <Route
-            path='/checkout'
-            render={() => currentUser !== null
-              ? <CheckoutPage />
-              : <Redirect to='/login' />}
-
-          />
-          <Route
-            exact
-            path='/login'
-            render={() => currentUser === null
-              ? <SignInPage />
-              : <Redirect to='/' />
-            }
-          />
-          <Route
-            exact
-            path='/register'
-            render={() => currentUser === null
-              ? <SignUpPage />
-              : <Redirect to='/' />
-            }
-          />
-        </Switch>
-        <Footer />
-      </AppContainer>
-    );
-  }
-};
-
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+        />
+        <Route
+          exact
+          path='/login'
+          render={() => currentUser === null
+            ? <SignInPage />
+            : <Redirect to='/' />
+          }
+        />
+        <Route
+          exact
+          path='/register'
+          render={() => currentUser === null
+            ? <SignUpPage />
+            : <Redirect to='/' />
+          }
+        />
+      </Switch>
+      <Footer />
+    </AppContainer>
+  );
 });
-
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
