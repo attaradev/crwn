@@ -34,7 +34,24 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
   })
 
   return await batch.commit();
-}
+};
+
+export const convertCollectionsSnapshotToMap = collections => {
+  const transformedCollection = collections.docs.map(document => {
+    const { title, items } = document.data();
+    return {
+      routName: encodeURI(title.toLowerCase()),
+      id: document.id,
+      title,
+      items
+    };
+  });
+
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
+};
 
 export const createUserProfileDocument = async (userAuthentication, additionalData) => {
   if (!userAuthentication) return;
