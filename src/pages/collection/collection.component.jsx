@@ -15,7 +15,7 @@ export const CollectionPage = connect(mapStateToProps)(
       <CollectionTitle as='h2'>{title}</CollectionTitle>
       <CollectionItems>
         {
-          items && items.map(item => <CollectionItem key={item.id} item={item} />)
+          items.map(item => <CollectionItem key={item.id} item={item} />)
         }
       </CollectionItems>
     </CollectionContainer>
