@@ -23,6 +23,36 @@ provider.setCustomParameters({ prompt: 'select_account' });
 
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  const collectionReference = firestore.collection(collectionKey);
+
+  const batch = firestore.batch();
+
+  objectsToAdd.forEach(object => {
+    const documentReference = collectionReference.doc();
+    batch.set(documentReference, object);
+  })
+
+  return await batch.commit();
+};
+
+export const convertCollectionsSnapshotToMap = collections => {
+  const transformedCollection = collections.docs.map(document => {
+    const { title, items } = document.data();
+    return {
+      routName: encodeURI(title.toLowerCase()),
+      id: document.id,
+      title,
+      items
+    };
+  });
+
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
+};
+
 export const createUserProfileDocument = async (userAuthentication, additionalData) => {
   if (!userAuthentication) return;
 
