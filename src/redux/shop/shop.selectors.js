@@ -20,3 +20,8 @@ export const selectCollection = collectionName => (
     collections => collections ? collections[collectionName] : []
   )
 );
+
+export const selectIsFetching = createSelector(
+  [selectShop],
+  shop => shop.isFetching
+);
