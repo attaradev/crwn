@@ -19,11 +19,13 @@ export const CollectionsOverview = connect(mapStateToProps)(
   ({ collections }) => (
     <CollectionsOverviewContainer>
       {
-        collections.map(collection => <CollectionsPreview
-          key={collection.id}
-          title={collection.title}
-          items={collection.items}
-        />)
+        collections.map(
+          ({ id, title, items }) => <CollectionsPreview
+            key={id}
+            title={title}
+            items={items}
+          />
+        )
       }
     </CollectionsOverviewContainer>
   )

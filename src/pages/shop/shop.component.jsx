@@ -1,16 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
-import { CollectionPage } from '../collection/collection.component';
-import { CollectionsOverview } from '../../components/collections-overview/collections-overview.component';
-import { WithSpinner } from '../../components/with-spinner/with-spinner.component';
-import { selectIsFetching } from '../../redux/shop/shop.selectors';
+import { CollectionsOverviewWithSpinner } from '../../containers/collections-overview-with-spinner/collections-overview-with-spinner.container';
+import { CollectionWithSpinner } from '../../containers/collection-with-spinner/collection-with-spinner.container';
 import { fetchCollectionsAsync } from '../../redux/shop/shop.actions';
 
-const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
-const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
 
 const ShopContainer = styled.div`
@@ -18,19 +13,16 @@ const ShopContainer = styled.div`
   min-height: 100%;
 `;
 
-const mapStateToProps = createStructuredSelector({
-  isFetching: selectIsFetching
-});
 
 const mapDispatchToProps = dispatch => ({
   fetchCollectionsAsync: () => dispatch(fetchCollectionsAsync())
 });
 
 export const ShopPage = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(
-  ({ match, isFetching, fetchCollectionsAsync }) => {
+  ({ match, fetchCollectionsAsync }) => {
     React.useEffect(() => {
       fetchCollectionsAsync();
     }, [fetchCollectionsAsync]);
@@ -40,19 +32,11 @@ export const ShopPage = connect(
         <Route
           exact
           path={`${match.path}`}
-          render={
-            (props) => <CollectionsOverviewWithSpinner
-              isLoading={isFetching}
-              {...props}
-            />
-          }
+          component={CollectionsOverviewWithSpinner}
         />
         <Route
           path={`${match.path}/:collectionName`}
-          render={(props) => <CollectionPageWithSpinner
-            isLoading={isFetching}
-            {...props}
-          />}
+          component={CollectionWithSpinner}
         />
       </ShopContainer>
     )

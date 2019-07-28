@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { CollectionItem } from '../../components/collection-item/collection-item.component';
+import { CollectionItem } from '../collection-item/collection-item.component';
 import { selectCollection } from '../../redux/shop/shop.selectors';
 import { CollectionContainer, CollectionItems, CollectionTitle } from './collection.styles';
 
@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 
-export const CollectionPage = connect(mapStateToProps)(
+export const Collection = connect(mapStateToProps)(
   ({ collection: { title, items } }) => (
     <CollectionContainer>
       <CollectionTitle as='h2'>{title}</CollectionTitle>
