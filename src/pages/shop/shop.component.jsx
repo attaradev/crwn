@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { CollectionsOverviewWithSpinner } from '../../containers/collections-overview-with-spinner/collections-overview-with-spinner.container';
 import { CollectionWithSpinner } from '../../containers/collection-with-spinner/collection-with-spinner.container';
-import { fetchCollectionsAsync } from '../../redux/shop/shop.actions';
+import { fetchCollections } from '../../redux/shop/shop.actions';
 
 
 
@@ -15,17 +15,17 @@ const ShopContainer = styled.div`
 
 
 const mapDispatchToProps = dispatch => ({
-  fetchCollectionsAsync: () => dispatch(fetchCollectionsAsync())
+  fetchCollections: () => dispatch(fetchCollections())
 });
 
 export const ShopPage = connect(
   null,
   mapDispatchToProps
 )(
-  ({ match, fetchCollectionsAsync }) => {
+  ({ match, fetchCollections }) => {
     React.useEffect(() => {
-      fetchCollectionsAsync();
-    }, [fetchCollectionsAsync]);
+      fetchCollections();
+    }, [fetchCollections]);
 
     return (
       <ShopContainer>

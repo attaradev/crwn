@@ -10,9 +10,10 @@ export const CollectionsPreview = ({ title, items }) => (
   <CollectionsPreviewContainer>
     <PreviewTitle as='h1'>{title}</PreviewTitle>
     <PreviewContainer>
-      {items
-        .filter((item, idx) => idx < 4)
-        .map((item) => <CollectionItem key={item.id} item={item} />)}
+      {
+        items
+          .filter((item, idx) => idx < 4)
+          .map((item) => <CollectionItem key={item.id} item={item} />)}
     </PreviewContainer>
   </CollectionsPreviewContainer>
 );

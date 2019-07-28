@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 
 export const shopReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ShopTypes.FETCH_COLLECTIONS_START:
+    case ShopTypes.FETCH_COLLECTIONS:
       return { ...state, isFetching: true }
     case ShopTypes.FETCH_COLLECTIONS_SUCCESS:
       return { ...state, isFetching: false, collections: action.payload }

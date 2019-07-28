@@ -3,11 +3,11 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { WithSpinner } from '../../components/with-spinner/with-spinner.component';
 import { Collection } from '../../components/collection/collection.component';
-import { selectIsFetching } from '../../redux/shop/shop.selectors';
+import { selectIsCollectionsLoaded } from '../../redux/shop/shop.selectors';
 
 
 const mapStateToProps = createStructuredSelector({
-  isLoading: selectIsFetching
+  isLoading: state => !selectIsCollectionsLoaded(state)
 });
 
 export const CollectionWithSpinner = compose(
