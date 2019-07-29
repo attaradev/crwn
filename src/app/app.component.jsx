@@ -11,8 +11,6 @@ import { SignInPage } from '../pages/sign-in/sign-in.component';
 import { SignUpPage } from '../pages/sign-up/sign-up.component';
 import { CheckoutPage } from '../pages/checkout/checkout.component';
 import { Footer } from '../components/footer/footer.component';
-import { auth, createUserProfileDocument } from '../utils/firebase.utils';
-import { setCurrentUser } from '../redux/user/user.actions';
 import { selectCurrentUser } from '../redux/user/user.selectors';
 
 
@@ -29,65 +27,39 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
 });
 
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-});
-
 export const App = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(({ currentUser, setCurrentUser }) => {
+  mapStateToProps
+)(({ currentUser }) => (
+  <AppContainer>
+    <Header />
+    <Switch>
+      <Route exact path='/' component={HomePage} />
+      <Route path='/shop' component={ShopPage} />
+      <Route path='/contact' component={ContactPage} />
+      <Route
+        path='/checkout'
+        render={() => currentUser !== null
+          ? <CheckoutPage />
+          : <Redirect to='/login' />}
 
-  React.useEffect(() => {
-    auth.onAuthStateChanged(
-      async authicatedUser => {
-        if (authicatedUser) {
-          const userReference = await createUserProfileDocument(authicatedUser);
-          userReference.onSnapshot(snapshot => {
-            setCurrentUser({
-              id: snapshot.id,
-              ...snapshot.data()
-            });
-          });
-        };
-
-        setCurrentUser(null);
-      }
-    );
-  }, [setCurrentUser])
-
-  return (
-    <AppContainer>
-      <Header />
-      <Switch>
-        <Route exact path='/' component={HomePage} />
-        <Route path='/shop' component={ShopPage} />
-        <Route path='/contact' component={ContactPage} />
-        <Route
-          path='/checkout'
-          render={() => currentUser !== null
-            ? <CheckoutPage />
-            : <Redirect to='/login' />}
-
-        />
-        <Route
-          exact
-          path='/login'
-          render={() => currentUser === null
-            ? <SignInPage />
-            : <Redirect to='/' />
-          }
-        />
-        <Route
-          exact
-          path='/register'
-          render={() => currentUser === null
-            ? <SignUpPage />
-            : <Redirect to='/' />
-          }
-        />
-      </Switch>
-      <Footer />
-    </AppContainer>
-  );
-});
+      />
+      <Route
+        exact
+        path='/login'
+        render={() => currentUser === null
+          ? <SignInPage />
+          : <Redirect to='/' />
+        }
+      />
+      <Route
+        exact
+        path='/register'
+        render={() => currentUser === null
+          ? <SignUpPage />
+          : <Redirect to='/' />
+        }
+      />
+    </Switch>
+    <Footer />
+  </AppContainer>
+));
