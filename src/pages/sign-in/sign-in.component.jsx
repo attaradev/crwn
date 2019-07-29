@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FormInput } from '../../components/form-input/form-input.component';
 import { Button } from '../../components/button/button.component';
-import { signInWithGoogle } from '../../redux/user/user.actions';
+import { signInWithGoogle, signInWithEmail } from '../../redux/user/user.actions';
 import { SignInContainer, Title, ButtonGroup } from './sign-in.styles';
 
 
@@ -13,14 +13,15 @@ const INITIAL_STATE = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  signInWithGoogle: dispatch(signInWithGoogle())
+  signInWithGoogle: () => dispatch(signInWithGoogle()),
+  signInWithEmail: emailAndPassword => dispatch(signInWithEmail(emailAndPassword))
 });
 
 export const SignInPage = connect(
   null,
   mapDispatchToProps
 )(
-  ({ signInWithGoogle }) => {
+  ({ signInWithGoogle, signInWithEmail }) => {
 
     const [state, setState] = useState(INITIAL_STATE);
 
@@ -32,13 +33,8 @@ export const SignInPage = connect(
     const handleSubmit = async (event) => {
       event.preventDefault();
 
-      // try {
-      //   const { email, password } = state;
-      //   await auth.signInWithEmailAndPassword(email, password);
-      //   setState(INITIAL_STATE);
-      // } catch (error) {
-      //   alert(error.message);
-      // }
+      signInWithEmail(state);
+      setState(INITIAL_STATE);
     }
 
     return (
@@ -67,7 +63,7 @@ export const SignInPage = connect(
             <Button type='submit'>Sign in</Button>
             <Button
               isGoogleSignIn
-              onClick={() => { signInWithGoogle() }}
+              onClick={signInWithGoogle}
             >
               Sign in with google
           </Button>
