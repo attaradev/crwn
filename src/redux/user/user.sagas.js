@@ -1,6 +1,19 @@
-import { all, takeLatest, put, call } from 'redux-saga/effects';
-import { auth, googleProvider, createUserProfileDocument } from '../../utils/firebase.utils';
-import { UserTypes, signInWithGoogleSuccess, signInWithGoogleFail, signInWithEmailFail } from './user.actions';
+import {
+  all,
+  takeLatest,
+  put,
+  call
+} from 'redux-saga/effects';
+import {
+  auth,
+  googleProvider,
+  createUserProfileDocument
+} from '../../utils/firebase.utils';
+import {
+  UserTypes,
+  signInSuccess,
+  signInFail
+} from './user.actions';
 
 
 function* signInWithGoogleAsync() {
@@ -8,9 +21,9 @@ function* signInWithGoogleAsync() {
     const { user } = yield auth.signInWithPopup(googleProvider);
     const userReference = yield createUserProfileDocument(user);
     const userSnapshot = yield userReference.get();
-    yield put(signInWithGoogleSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
+    yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
-    yield put(signInWithGoogleFail(error.message));
+    yield put(signInFail(error.message));
   }
 
 }
@@ -19,21 +32,24 @@ function* watchSignInWithGoogle() {
   yield takeLatest(UserTypes.SIGN_IN_WITH_GOOGLE, signInWithGoogleAsync);
 }
 
-function* signInWithEmailAsync(emailAndPassword) {
+function* signInWithEmailAndPasswordAsync({ payload: { email, password } }) {
   try {
-
+    const { user } = yield auth.signInWithEmailAndPassword(email, password);
+    const userReference = yield createUserProfileDocument(user);
+    const userSnapshot = yield userReference.get();
+    yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
-    yield put(signInWithEmailFail(error.message));
+    yield put(signInFail(error.message));
   }
 }
 
-function* watchSignInWithEmail() {
-  yield takeLatest(UserTypes.SIGN_IN_WITH_EMAIL, signInWithEmailAsync)
+function* watchSignInWithEmailAndPassword() {
+  yield takeLatest(UserTypes.SIGN_IN_WITH_EMAIL_AND_PASSWORD, signInWithEmailAndPasswordAsync)
 }
 
 export function* userSagas() {
   yield all([
     call(watchSignInWithGoogle),
-    call(watchSignInWithEmail)
+    call(watchSignInWithEmailAndPassword)
   ]);
 }

@@ -3,8 +3,15 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FormInput } from '../../components/form-input/form-input.component';
 import { Button } from '../../components/button/button.component';
-import { signInWithGoogle, signInWithEmail } from '../../redux/user/user.actions';
-import { SignInContainer, Title, ButtonGroup } from './sign-in.styles';
+import {
+  signInWithGoogle,
+  signInWithEmailAndPassword
+} from '../../redux/user/user.actions';
+import {
+  SignInContainer,
+  Title,
+  ButtonGroup
+} from './sign-in.styles';
 
 
 const INITIAL_STATE = {
@@ -14,14 +21,14 @@ const INITIAL_STATE = {
 
 const mapDispatchToProps = dispatch => ({
   signInWithGoogle: () => dispatch(signInWithGoogle()),
-  signInWithEmail: emailAndPassword => dispatch(signInWithEmail(emailAndPassword))
+  signInWithEmailAndPassword: emailAndPassword => dispatch(signInWithEmailAndPassword(emailAndPassword))
 });
 
 export const SignInPage = connect(
   null,
   mapDispatchToProps
 )(
-  ({ signInWithGoogle, signInWithEmail }) => {
+  ({ signInWithGoogle, signInWithEmailAndPassword }) => {
 
     const [state, setState] = useState(INITIAL_STATE);
 
@@ -33,8 +40,7 @@ export const SignInPage = connect(
     const handleSubmit = async (event) => {
       event.preventDefault();
 
-      signInWithEmail(state);
-      setState(INITIAL_STATE);
+      signInWithEmailAndPassword(state);
     }
 
     return (
