@@ -63,10 +63,24 @@ function* watchCheckUserSession() {
   yield takeLatest(UserTypes.CHECK_USER_SESSION, checkUserSessionAsync);
 }
 
+function* signOutAsync() {
+  try {
+    yield auth.signOut();
+    yield put(signInSuccess());
+  } catch (error) {
+    yield put(signInFail(error.message));
+  }
+}
+
+function* watchSignOut() {
+  yield takeLatest(UserTypes.SIGN_OUT, signOutAsync)
+}
+
 export function* userSagas() {
   yield all([
     call(watchSignInWithGoogle),
     call(watchSignInWithEmailAndPassword),
-    call(watchCheckUserSession)
+    call(watchCheckUserSession),
+    call(watchSignOut)
   ]);
 }
