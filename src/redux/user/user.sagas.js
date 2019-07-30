@@ -13,7 +13,9 @@ import {
 import {
   UserTypes,
   signInSuccess,
-  signInFail
+  signInFail,
+  signOutSuccess,
+  signOutFail
 } from './user.actions';
 
 function* getUserSnapshot(user) {
@@ -66,9 +68,9 @@ function* watchCheckUserSession() {
 function* signOutAsync() {
   try {
     yield auth.signOut();
-    yield put(signInSuccess());
+    yield put(signOutSuccess());
   } catch (error) {
-    yield put(signInFail(error.message));
+    yield put(signOutFail(error.message));
   }
 }
 
