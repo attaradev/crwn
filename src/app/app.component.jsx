@@ -39,7 +39,7 @@ export const App = connect(
   React.useEffect(() => {
     checkUserSession();
   }, [checkUserSession])
-  
+
   return (
     <AppContainer>
       <Header />
@@ -51,7 +51,7 @@ export const App = connect(
           path='/checkout'
           render={() => currentUser !== null
             ? <CheckoutPage />
-            : <Redirect to='/login' />}
+            : <Redirect to='/register' />}
 
         />
         <Route
