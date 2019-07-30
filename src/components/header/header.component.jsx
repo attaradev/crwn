@@ -20,7 +20,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-  signOut: dispatch(signOut())
+  signOut: () => dispatch(signOut())
 });
 
 export const Header = connect(
