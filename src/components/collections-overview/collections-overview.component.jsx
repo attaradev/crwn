@@ -15,7 +15,9 @@ const CollectionsOverviewContainer = styled.div`
   flex-direction: column;
 `;
 
-export const CollectionsOverview = connect(mapStateToProps)(
+export const CollectionsOverview = connect(
+  mapStateToProps
+)(
   ({ collections }) => (
     <CollectionsOverviewContainer>
       {

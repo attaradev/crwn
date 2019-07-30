@@ -11,9 +11,8 @@ import { SignInPage } from '../pages/sign-in/sign-in.component';
 import { SignUpPage } from '../pages/sign-up/sign-up.component';
 import { CheckoutPage } from '../pages/checkout/checkout.component';
 import { Footer } from '../components/footer/footer.component';
-import { auth, createUserProfileDocument } from '../utils/firebase.utils';
-import { setCurrentUser } from '../redux/user/user.actions';
 import { selectCurrentUser } from '../redux/user/user.selectors';
+import { checkUserSession } from '../redux/user/user.actions';
 
 
 const AppContainer = styled.div`
@@ -30,32 +29,17 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-});
+  checkUserSession: () => dispatch(checkUserSession())
+})
 
 export const App = connect(
   mapStateToProps,
   mapDispatchToProps
-)(({ currentUser, setCurrentUser }) => {
-
+)(({ currentUser, checkUserSession }) => {
   React.useEffect(() => {
-    auth.onAuthStateChanged(
-      async authicatedUser => {
-        if (authicatedUser) {
-          const userReference = await createUserProfileDocument(authicatedUser);
-          userReference.onSnapshot(snapshot => {
-            setCurrentUser({
-              id: snapshot.id,
-              ...snapshot.data()
-            });
-          });
-        };
-
-        setCurrentUser(null);
-      }
-    );
-  }, [setCurrentUser])
-
+    checkUserSession();
+  }, [checkUserSession])
+  
   return (
     <AppContainer>
       <Header />
@@ -89,5 +73,5 @@ export const App = connect(
       </Switch>
       <Footer />
     </AppContainer>
-  );
+  )
 });
