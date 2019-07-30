@@ -74,3 +74,10 @@ export const createUserProfileDocument = async (userAuthentication, additionalDa
 
   return userReference;
 };
+
+export const getCurrentUser = () => new Promise((resolve, reject) => {
+  const unsubscribe = auth.onAuthStateChanged(authenticatedUser => {
+    unsubscribe();
+    resolve(authenticatedUser);
+  }, reject);
+});

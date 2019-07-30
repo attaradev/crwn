@@ -6,8 +6,9 @@ import {
 } from 'redux-saga/effects';
 import {
   auth,
+  createUserProfileDocument,
+  getCurrentUser,
   googleProvider,
-  createUserProfileDocument
 } from '../../utils/firebase.utils';
 import {
   UserTypes,
@@ -48,9 +49,24 @@ function* watchSignInWithEmailAndPassword() {
   yield takeLatest(UserTypes.SIGN_IN_WITH_EMAIL_AND_PASSWORD, signInWithEmailAndPasswordAsync)
 }
 
+function* checkUserSessionAsync() {
+  try {
+    const authenticatedUser = yield getCurrentUser();
+    if (!authenticatedUser) return;
+    yield getUserSnapshot(authenticatedUser);
+  } catch (error) {
+    yield put(signInFail(error.message));
+  }
+}
+
+function* watchCheckUserSession() {
+  yield takeLatest(UserTypes.CHECK_USER_SESSION, checkUserSessionAsync);
+}
+
 export function* userSagas() {
   yield all([
     call(watchSignInWithGoogle),
-    call(watchSignInWithEmailAndPassword)
+    call(watchSignInWithEmailAndPassword),
+    call(watchCheckUserSession)
   ]);
 }

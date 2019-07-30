@@ -12,6 +12,7 @@ import { SignUpPage } from '../pages/sign-up/sign-up.component';
 import { CheckoutPage } from '../pages/checkout/checkout.component';
 import { Footer } from '../components/footer/footer.component';
 import { selectCurrentUser } from '../redux/user/user.selectors';
+import { checkUserSession } from '../redux/user/user.actions';
 
 
 const AppContainer = styled.div`
@@ -27,39 +28,50 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
 });
 
-export const App = connect(
-  mapStateToProps
-)(({ currentUser }) => (
-  <AppContainer>
-    <Header />
-    <Switch>
-      <Route exact path='/' component={HomePage} />
-      <Route path='/shop' component={ShopPage} />
-      <Route path='/contact' component={ContactPage} />
-      <Route
-        path='/checkout'
-        render={() => currentUser !== null
-          ? <CheckoutPage />
-          : <Redirect to='/login' />}
+const mapDispatchToProps = dispatch => ({
+  checkUserSession: () => dispatch(checkUserSession())
+})
 
-      />
-      <Route
-        exact
-        path='/login'
-        render={() => currentUser === null
-          ? <SignInPage />
-          : <Redirect to='/' />
-        }
-      />
-      <Route
-        exact
-        path='/register'
-        render={() => currentUser === null
-          ? <SignUpPage />
-          : <Redirect to='/' />
-        }
-      />
-    </Switch>
-    <Footer />
-  </AppContainer>
-));
+export const App = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(({ currentUser, checkUserSession }) => {
+  React.useEffect(() => {
+    checkUserSession();
+  }, [checkUserSession])
+  
+  return (
+    <AppContainer>
+      <Header />
+      <Switch>
+        <Route exact path='/' component={HomePage} />
+        <Route path='/shop' component={ShopPage} />
+        <Route path='/contact' component={ContactPage} />
+        <Route
+          path='/checkout'
+          render={() => currentUser !== null
+            ? <CheckoutPage />
+            : <Redirect to='/login' />}
+
+        />
+        <Route
+          exact
+          path='/login'
+          render={() => currentUser === null
+            ? <SignInPage />
+            : <Redirect to='/' />
+          }
+        />
+        <Route
+          exact
+          path='/register'
+          render={() => currentUser === null
+            ? <SignUpPage />
+            : <Redirect to='/' />
+          }
+        />
+      </Switch>
+      <Footer />
+    </AppContainer>
+  )
+});
