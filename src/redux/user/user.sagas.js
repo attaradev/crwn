@@ -15,13 +15,16 @@ import {
   signInFail
 } from './user.actions';
 
+function* getUserSnapshot(user) {
+  const userReference = yield createUserProfileDocument(user);
+  const userSnapshot = yield userReference.get();
+  yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
+}
 
 function* signInWithGoogleAsync() {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider);
-    const userReference = yield createUserProfileDocument(user);
-    const userSnapshot = yield userReference.get();
-    yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
+    yield getUserSnapshot(user);
   } catch (error) {
     yield put(signInFail(error.message));
   }
@@ -35,9 +38,7 @@ function* watchSignInWithGoogle() {
 function* signInWithEmailAndPasswordAsync({ payload: { email, password } }) {
   try {
     const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    const userReference = yield createUserProfileDocument(user);
-    const userSnapshot = yield userReference.get();
-    yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
+    yield getUserSnapshot(user);
   } catch (error) {
     yield put(signInFail(error.message));
   }
