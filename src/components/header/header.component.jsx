@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import { CartIcon } from '../cart-icon/cart-icon.component';
 import { CartDropdown } from '../cart-dropdown/cart-dropdown.component';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
-import { auth } from '../../utils/firebase.utils';
+import { signOut } from '../../redux/user/user.actions';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import {
@@ -19,7 +19,14 @@ const mapStateToProps = createStructuredSelector({
   hidden: selectCartHidden
 });
 
-export const Header = connect(mapStateToProps)(({ currentUser, hidden }) => (
+const mapDispatchToProps = dispatch => ({
+  signOut: dispatch(signOut())
+});
+
+export const Header = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(({ currentUser, signOut, hidden }) => (
   <HeaderContainer>
     <LogoContainer to='/'>
       <Logo />
@@ -30,7 +37,7 @@ export const Header = connect(mapStateToProps)(({ currentUser, hidden }) => (
       {
         currentUser === null
           ? <NavigationLink to='/login'>Sign in</NavigationLink>
-          : <NavigationLink as='div' onClick={() => auth.signOut()}>Sign out</NavigationLink>
+          : <NavigationLink as='div' onClick={signOut}>Sign out</NavigationLink>
       }
       <CartIcon />
     </NavigationContainer>
