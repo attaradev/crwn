@@ -1,6 +1,7 @@
 {
   "name": "crwn",
   "version": "0.1.0",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "firebase": "^6.2.4",

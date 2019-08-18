@@ -1,6 +1,8 @@
 {
   "name": "crwn-server",
   "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
   "engines": {
     "node": "12.8.0",
     "npm": "6.10.2",
@@ -9,9 +11,10 @@
   "scripts": {
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
-    "build": "cd client && npm run build",
+    "build": "cd client && yarn build",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "start": "node server.js",
+    "test": "cd client && yarn test",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "dependencies": {
@@ -22,6 +25,7 @@
     "stripe": "6.28.0"
   },
   "devDependencies": {
-    "concurrently": "^4.0.1"
+    "concurrently": "^4.0.1",
+    "nodemon": "^1.19.1"
   }
 }
