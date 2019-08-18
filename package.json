@@ -10,10 +10,10 @@
   },
   "scripts": {
     "client": "cd client && yarn start",
-    "server": "nodemon server.js",
-    "build": "cd client && npm run build",
+    "server": "nodemon --exec server.js",
+    "build": "babel server.js -d dist && cd client && npm run build",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "start": "node server.js",
+    "start": "node dist/sserver.js",
     "test": "cd client && npm install && npm install && npm run test",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
@@ -25,6 +25,9 @@
     "stripe": "6.28.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "concurrently": "^4.0.1",
     "nodemon": "^1.19.1"
   }
