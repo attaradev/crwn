@@ -10,10 +10,10 @@
   },
   "scripts": {
     "client": "cd client && yarn start",
-    "server": "nodemon --exec server.js",
+    "server": "nodemon --exec babel server.js",
     "build": "babel server.js -d dist && cd client && npm run build",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "start": "node dist/sserver.js",
+    "start": "node dist/server.js",
     "test": "cd client && npm install && npm install && npm run test",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
