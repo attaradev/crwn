@@ -9,7 +9,7 @@
     "yarn": "1.17.3"
   },
   "scripts": {
-    "client": "cd client && yarn start",ss
+    "client": "cd client && yarn start",
     "server": "nodemon server.js",
     "build": "cd client && npm run build",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
