@@ -8,9 +8,10 @@
     "npm": "6.10.2",
     "yarn": "1.17.3"
   },
+  "proxy": "http://localhost/5000",
   "scripts": {
     "client": "cd client && yarn start",
-    "server": "nodemon --exec babel server.js",
+    "server": "nodemon --exec babel-node server.js",
     "build": "babel server.js -d dist && cd client && npm run build",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "start": "node dist/server.js",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "concurrently": "^4.0.1",
     "nodemon": "^1.19.1"
