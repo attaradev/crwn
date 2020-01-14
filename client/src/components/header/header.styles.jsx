@@ -6,30 +6,39 @@ export const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 25px;
-  position: sticky;
-  top: 0;
-  background-color: rgba(255, 255, 255, 0.95);
-  z-index: 1000;
+
+  @media screen and (max-width: 800px) {
+    height: 60px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
 `;
 
 export const LogoContainer = styled(Link)`
   height: 100%;
   width: 70px;
-  padding: 25px 0;
+  padding: 25px;
+
+  @media screen and (max-width: 800px) {
+    width: 50px;
+    padding: 0;
+  }
 `;
 
-export const NavigationContainer = styled.nav`
+export const OptionsContainer = styled.div`
   width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  @media screen and (max-width: 800px) {
+    width: 80%;
+  }
 `;
 
-export const NavigationLink = styled(Link)`
+export const OptionLink = styled(Link)`
   padding: 10px 15px;
-  text-transform: uppercase;
   cursor: pointer;
 `;

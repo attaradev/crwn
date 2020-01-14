@@ -1,8 +1,4 @@
-import styled, { css } from 'styled-components';
-
-const fontSize = css`
-  font-size: 16px;
-`;
+import styled from 'styled-components';
 
 export const CartItemContainer = styled.div`
   width: 100%;
@@ -11,23 +7,15 @@ export const CartItemContainer = styled.div`
   margin-bottom: 15px;
 `;
 
-export const ItemImage = styled.img`
+export const CartItemImage = styled.img`
   width: 30%;
 `;
 
-export const ItemsDetails = styled.div`
+export const ItemDetailsContainer = styled.div`
   width: 70%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   padding: 10px 20px;
-`;
-
-export const ItemName = styled.span`
-  ${fontSize}
-`;
-
-export const ItemPrice = styled.span`
-  ${fontSize}
 `;

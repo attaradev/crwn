@@ -1,44 +1,37 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
-import styled from 'styled-components';
-import { CollectionsOverviewWithSpinner } from '../../containers/collections-overview-with-spinner/collections-overview-with-spinner.container';
-import { CollectionWithSpinner } from '../../containers/collection-with-spinner/collection-with-spinner.container';
-import { fetchCollections } from '../../redux/shop/shop.actions';
+import { connect } from 'react-redux';
 
+import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 
+import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.container';
+import CollectionPageContainer from '../collection/collection.container';
 
-const ShopContainer = styled.div`
-  margin-bottom: 6rem;
-  min-height: 100%;
-`;
+const ShopPage = ({ fetchCollectionsStart, match }) => {
+  useEffect(() => {
+    fetchCollectionsStart();
+  }, [fetchCollectionsStart]);
 
+  return (
+    <div className='shop-page'>
+      <Route
+        exact
+        path={`${match.path}`}
+        component={CollectionsOverviewContainer}
+      />
+      <Route
+        path={`${match.path}/:collectionId`}
+        component={CollectionPageContainer}
+      />
+    </div>
+  );
+};
 
 const mapDispatchToProps = dispatch => ({
-  fetchCollections: () => dispatch(fetchCollections())
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
 });
 
-export const ShopPage = connect(
+export default connect(
   null,
   mapDispatchToProps
-)(
-  ({ match, fetchCollections }) => {
-    React.useEffect(() => {
-      fetchCollections();
-    }, [fetchCollections]);
-
-    return (
-      <ShopContainer>
-        <Route
-          exact
-          path={`${match.path}`}
-          component={CollectionsOverviewWithSpinner}
-        />
-        <Route
-          path={`${match.path}/:collectionName`}
-          component={CollectionWithSpinner}
-        />
-      </ShopContainer>
-    )
-  }
-);
+)(ShopPage);

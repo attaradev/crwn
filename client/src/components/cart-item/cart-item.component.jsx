@@ -1,24 +1,21 @@
-import React from 'react'
-import { formatAsMoney } from '../../utils/cart.utils';
+import React from 'react';
+
 import {
   CartItemContainer,
-  ItemImage,
-  ItemsDetails,
-  ItemName,
-  ItemPrice
+  ItemDetailsContainer,
+  CartItemImage
 } from './cart-item.styles';
 
-
-export const CartItem = ({ item: { imageUrl, name, price, quantity } }) => (
+const CartItem = ({ item: { imageUrl, price, name, quantity } }) => (
   <CartItemContainer>
-    <ItemImage src={imageUrl} alt={name} />
-    <ItemsDetails>
-      <ItemName>
-        {name}
-      </ItemName>
-      <ItemPrice>
-        {quantity} x {formatAsMoney(price)}
-      </ItemPrice>
-    </ItemsDetails>
+    <CartItemImage src={imageUrl} alt='item' />
+    <ItemDetailsContainer>
+      <span>{name}</span>
+      <span>
+        {quantity} x ${price}
+      </span>
+    </ItemDetailsContainer>
   </CartItemContainer>
 );
+
+export default CartItem;

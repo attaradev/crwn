@@ -1,46 +1,52 @@
-export const UserTypes = {
-  SIGN_IN_WITH_GOOGLE: 'SIGN_IN_WITH_GOOGLE',
-  SIGN_IN_WITH_EMAIL_AND_PASSWORD: 'SIGN_IN_WITH_EMAIL_AND_PASSWORD',
-  SIGN_IN_SUCCESS: 'SIGN_IN_SUCCESS',
-  SIGN_IN_FAIL: 'SIGN_IN_FAIL',
-  CHECK_USER_SESSION: 'CHECK_USER_SESSION',
-  SIGN_OUT: 'SIGN_OUT',
-  SIGN_OUT_SUCCESS: 'SIGN_OUT_SUCCESS',
-  SIGN_OUT_FAIL: 'SIGN_OUT_FAIL'
-};
+import UserActionTypes from './user.types';
 
-export const signInWithGoogle = () => ({
-  type: UserTypes.SIGN_IN_WITH_GOOGLE,
-});
-
-export const signInWithEmailAndPassword = emailAndPassword => ({
-  type: UserTypes.SIGN_IN_WITH_EMAIL_AND_PASSWORD,
-  payload: emailAndPassword
+export const googleSignInStart = () => ({
+  type: UserActionTypes.GOOGLE_SIGN_IN_START
 });
 
 export const signInSuccess = user => ({
-  type: UserTypes.SIGN_IN_SUCCESS,
+  type: UserActionTypes.SIGN_IN_SUCCESS,
   payload: user
 });
 
-export const signInFail = error => ({
-  type: UserTypes.SIGN_IN_FAIL,
+export const signInFailure = error => ({
+  type: UserActionTypes.SIGN_IN_FAILURE,
   payload: error
 });
 
-export const signOut = () => ({
-  type: UserTypes.SIGN_OUT
-});
-
-export const signOutSuccess = () => ({
-  type: UserTypes.SIGN_OUT_SUCCESS
-});
-
-export const signOutFail = error => ({
-  type: UserTypes.SIGN_OUT_FAIL,
-  payload: error
+export const emailSignInStart = emailAndPassword => ({
+  type: UserActionTypes.EMAIL_SIGN_IN_START,
+  payload: emailAndPassword
 });
 
 export const checkUserSession = () => ({
-  type: UserTypes.CHECK_USER_SESSION
+  type: UserActionTypes.CHECK_USER_SESSION
+});
+
+export const signOutStart = () => ({
+  type: UserActionTypes.SIGN_OUT_START
+});
+
+export const signOutSuccess = () => ({
+  type: UserActionTypes.SIGN_OUT_SUCCESS
+});
+
+export const signOutFailure = error => ({
+  type: UserActionTypes.SIGN_OUT_FAILURE,
+  payload: error
+});
+
+export const signUpStart = userCredentials => ({
+  type: UserActionTypes.SIGN_UP_START,
+  payload: userCredentials
+});
+
+export const signUpSuccess = ({ user, additionalData }) => ({
+  type: UserActionTypes.SIGN_UP_SUCCESS,
+  payload: { user, additionalData }
+});
+
+export const signUpFailure = error => ({
+  type: UserActionTypes.SIGN_UP_FAILURE,
+  payload: error
 });
