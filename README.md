@@ -3,7 +3,7 @@ Let's make our code mobile responsive! We wrote some media queries into the appr
 
 # How to fork and clone
 
-One quick note about cloning this project. If you wish to make commits and push the code up after cloning this repo, you should fork the project first. In order to own your own copy of this repository, you have to fork it so you get your own copy on your own profile!
+One quick note about cloning this project. If you wish to make commits and push the code up after cloning this repository, you should fork the project first. In order to own your own copy of this repository, you have to fork it so that you get your own copy on your own profile!
 
 You can see the fork button in the top right corner of every GitHub project; click it and a copy of the project will be added to your GitHub profile under the same name as the original project.
 
@@ -37,7 +37,7 @@ Remember to add a file called `.env` to the root folder! In that `.env` file rem
 
 ![alt text](https://i.ibb.co/wpLx8Lh/Screen-Shot-2019-07-01-at-2-26-26-AM.png "image to secret key")
 
-You will also need to connect your existing Heroku app to this new forked and cloned repo, or you have to create a new Heroku app and push to it. A quick refresher on how to do either of these:
+You will also need to connect your existing Heroku app to this new forked and cloned repository, or you have to create a new Heroku app and push to it. A quick refresher on how to do either of these:
 
 ## Set to an existing Heroku app
 
