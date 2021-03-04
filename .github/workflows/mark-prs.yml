@@ -1,0 +1,19 @@
+name: Mark PRs as deployed
+
+on:
+    push:
+        branches: [master]
+
+jobs:
+    comment:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Mark Pull Requests as Deployed
+              uses: mikeattara/mark-prs-as-deployed@v1.0
+              with:
+                  PR_LIST: '[1, 2, 3, 4, 5, 6, 7]'
+                  IS_PRODUCTION_DEPLOY: false
+
+
+
+
