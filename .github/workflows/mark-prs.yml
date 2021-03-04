@@ -9,11 +9,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Mark Pull Requests as Deployed
-              uses: mikeattara/mark-prs-as-deployed@v1.4.2
+              uses: mikeattara/mark-prs-as-deployed@v1.4.3
               with:
                   PR_LIST: '[1, 2, 3, 4, 5, 6, 7, 8]'
                   IS_PRODUCTION_DEPLOY: false
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 
 
