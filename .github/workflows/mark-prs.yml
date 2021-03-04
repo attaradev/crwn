@@ -5,14 +5,15 @@ on:
         branches: [master]
 
 jobs:
-    comment:
+    write-comments:
         runs-on: ubuntu-latest
         steps:
             - name: Mark Pull Requests as Deployed
-              uses: mikeattara/mark-prs-as-deployed@v1.3
+              uses: mikeattara/mark-prs-as-deployed@v1.4.2
               with:
                   PR_LIST: '[1, 2, 3, 4, 5, 6, 7, 8]'
                   IS_PRODUCTION_DEPLOY: false
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
 
