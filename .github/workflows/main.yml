@@ -9,9 +9,9 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Mark Pull Requests as Deployed
-              uses: mikeattara/mark-prs-as-deployed@v1.5.4
+              uses: mikeattara/mark-prs-as-deployed@v1.6
               with:
-                  PR_LIST: '[7, 8, 9, 10]'
+                  PR_LIST: '[11, 12, 13]'
                   IS_PRODUCTION_DEPLOY: 'true'
 
 
